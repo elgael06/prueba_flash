@@ -27,11 +27,10 @@ def crear_usuario():
         apeido      = request.form['apeido']
         imagen      = request.files['avatar']
         url_image   = 'static/images/avatar/' + nombre + '_'+ apeido + secure_filename(imagen.filename)
-        
+
         imagen.save(url_image)
         views.insertar(nombre=nombre,apeido=apeido,image=url_image)
         return redirect(url_for('obter_usuarios'))#llama al metodo obtener usuarios
-        
 
 if __name__ == "__main__":
     app.run(debug=True,port=8080)
