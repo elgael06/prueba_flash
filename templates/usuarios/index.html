@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usuarios</title>
+    <link href="/static/css/main.css" rel="stylesheet" />
+</head>
+<body>
+    <a href="/">regresar</a>
+    <h3>lista usarios</h3>
+    <hr/>
+    <ol>
+        {%for item in lista:%}
+            <li > 
+                <img src="{{item['img']}}" height="50" alt="{{item['nombre']}}" /> 
+                <label title="{{item['img']}}">
+                    {{item['id'] +' - '+ item['nombre'] + ' ' + item['apeido'] + ' ' + item['fecha_alta']}}
+                </label>
+            </li>
+        {%endfor%}
+    </ol>
+    <hr/>
+    <a href="/crear">
+        <button >crear</button>
+    </a>
+</body>
+</html>
