@@ -1,15 +1,11 @@
-from flask import Flask,render_template,request,redirect,url_for
+from flask import Flask,render_template,request,redirect,url_for,send_from_directory
 from werkzeug.utils import secure_filename
 import os
 
 from api.usuarios import views
 
-app = Flask(__name__)
+app = Flask(__name__,static_folder='frontend/build/',template_folder='frontend/build/')
 
-@app.route('/')
-def Home_app():
-    '''paguina principal. '''
-    return render_template('/index.html',name='gael')
 
 @app.route('/usuarios')
 def obter_usuarios():
@@ -36,6 +32,19 @@ def crear_usuario():
         views.insertar(nombre=nombre,apeido=apeido,image=url_image)
         #redirigimos a url de usuarios
         return redirect(url_for('obter_usuarios'))#llama al metodo obtener usuarios
+
+'''
+    URL DINAMICA
+'''
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def Home_app(path):
+    '''paguina principal. '''
+    # return render_template('/index.html',name='gael')
+    if path != "" and os.path.exists(app.static_folder + '/' + path):
+        return send_from_directory(app.static_folder, path)
+    else:
+        return send_from_directory(app.static_folder,'index.html')
 
 if __name__ == "__main__":
     # app.static_folder('')
