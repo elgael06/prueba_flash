@@ -23,14 +23,21 @@ def crear_usuario():
     if(request.method=='GET'):
         return render_template('usuarios/crear.html')
     elif request.method=='POST':
+        #datos de formulario
         nombre      = request.form['nombre']
         apeido      = request.form['apeido']
+        #archivo en formulario.
         imagen      = request.files['avatar']
-        url_image   = 'static/images/avatar/' + nombre + '_'+ apeido + secure_filename(imagen.filename)
-
+        #url donde se guardara arcivo
+        url_image   = 'static/images/avatar/' + nombre + '_'+ apeido+'_' + secure_filename(imagen.filename)
+        #guardamos archivo
         imagen.save(url_image)
+        #agregamos archivo a lista
         views.insertar(nombre=nombre,apeido=apeido,image=url_image)
+        #redirigimos a url de usuarios
         return redirect(url_for('obter_usuarios'))#llama al metodo obtener usuarios
 
 if __name__ == "__main__":
+    # app.static_folder('')
+    # app.template_folder('')
     app.run(debug=True,port=8080)
