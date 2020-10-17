@@ -40,7 +40,6 @@ def crear_usuario():
 @app.route('/<path:path>')
 def Home_app(path):
     '''paguina principal. '''
-    # return render_template('/index.html',name='gael')
     if path != "" and os.path.exists(app.static_folder + '/' + path):
         return send_from_directory(app.static_folder, path)
     else:
