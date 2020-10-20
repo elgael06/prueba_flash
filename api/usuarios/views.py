@@ -6,8 +6,9 @@ lista_usuarios = [
         'nombre':'gael',
         'apeido':'valenz',
         'create':'10-10-2020',
-        'img':'',
+        'img':'static/images/avatar/gael_val_Captura_de_pantalla_de_2020-10-19_15-47-41.png',
     }
+    
 ]
 
 def usuarios():
